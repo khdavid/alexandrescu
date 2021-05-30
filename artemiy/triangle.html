@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Draw a line</title>
+</head>
+<body>
+<canvas id="DemoCanvas" width="2000" height="2000"></canvas>  
+<script>  
+var canvas = document.getElementById('DemoCanvas');
+function line(ax, ay, bx, by, color = 'red')
+{
+  var scale = 40;
+  xCenter = 800;
+  yCenter = 500;
+  context.lineWidth = 10;
+  context.beginPath(); 
+  context.moveTo(xCenter + scale * ax, yCenter - scale * ay);
+  context.lineTo(xCenter + scale * bx, yCenter - scale * by);
+  context.strokeStyle = color
+  context.stroke();
+}
+
+if (canvas.getContext) 
+ {
+  var context = canvas.getContext('2d');
+  
+  line(3, 1, 1, 5)
+  line(1, 5, -3, -5)
+  line(-3, -5, 3, 1)
+ }
+</script> 
+</body>
+</html>
