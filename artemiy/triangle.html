@@ -8,15 +8,40 @@
 <canvas id="DemoCanvas" width="2000" height="2000"></canvas>  
 <script>  
 var canvas = document.getElementById('DemoCanvas');
-function line(ax, ay, bx, by, color = 'red')
-{
+
   var scale = 40;
   xCenter = 800;
   yCenter = 500;
-  context.lineWidth = 10;
+  gLineWidth = 10;
+
+function getX(x)
+{
+  return xCenter + scale * x; 
+}
+
+function getY(y)
+{
+  return yCenter - scale * y; 
+}
+
+function circle(x, y, d, color = 'black')
+{
+  context.beginPath();
+  context.arc(getX(x), getY(y), 0.5 * d * scale, 0, 2 * Math.PI, false);
+  context.fillStyle = color;
+  context.fill();
+  context.lineWidth = gLineWidth;
+  context.strokeStyle = color;
+  context.stroke();
+
+}
+
+function line(ax, ay, bx, by, color = 'red')
+{
+  context.lineWidth = gLineWidth;
   context.beginPath(); 
-  context.moveTo(xCenter + scale * ax, yCenter - scale * ay);
-  context.lineTo(xCenter + scale * bx, yCenter - scale * by);
+  context.moveTo(getX(ax), getY(ay));
+  context.lineTo(getX(bx), getY(by));
   context.strokeStyle = color
   context.stroke();
 }
@@ -25,9 +50,8 @@ if (canvas.getContext)
  {
   var context = canvas.getContext('2d');
   
-  line(3, 1, 1, 5)
-  line(1, 5, -3, -5)
-  line(-3, -5, 3, 1)
+  circle(3.5, 5.5, 1, "red");
+  circle(5.5, 5.5, 1, "green")
  }
 </script> 
 </body>
