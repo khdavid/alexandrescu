@@ -38,7 +38,7 @@ function circle(x, y, d, color = 'black')
 
 }
 
-function line(ax, ay, bx, by, color = 'red')
+function line(ax, ay, bx, by, color = 'black')
 {
   var context = canvas.getContext('2d');
 
@@ -69,6 +69,21 @@ function polygon(coordinates, color = "black")
   context.fill();
 
 }
+
+if (canvas.getContext) 
+ {
+  var context = canvas.getContext('2d');
+  
+  polygon([2, 1, 7, 1, 7, 7, 2, 7], "violet")
+  circle(3.5, 5.5, 1, "red");
+  circle(5.5, 5.5, 1, "green")
+  polygon([4, 3, 5, 3, 4.5, 5], "pink")
+  line(3, 3, 4, 2, 'yellow')
+  line(4, 2, 5, 2, 'yellow')
+  line(5, 2, 6, 3, 'yellow')
+  
+  
+ }
 
  
 </script> 
