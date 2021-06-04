@@ -50,6 +50,26 @@ function line(ax, ay, bx, by, color = 'black')
   context.stroke();
 }
 
+function polyline(coordinates, color = "black")
+{
+  var context = canvas.getContext('2d');
+
+  context.lineWidth = gLineWidth;
+  context.beginPath(); 
+  context.moveTo(getX(coordinates[0]), getY(coordinates[1]));
+
+  for (i = 2; i < coordinates.length; i += 2)
+  {
+    xNew = getX(coordinates[i]);
+	yNew = getY(coordinates[i+1])
+	context.lineTo(xNew, yNew);
+  }
+  context.strokeStyle = color
+  context.stroke();
+
+}
+
+
 function polygon(coordinates, color = "black")
 {
   var context = canvas.getContext('2d');
@@ -81,6 +101,8 @@ if (canvas.getContext)
   line(3, 3, 4, 2, 'yellow')
   line(4, 2, 5, 2, 'yellow')
   line(5, 2, 6, 3, 'yellow')
+  
+  //polyline([3, 3, 4, 2, 5, 2, 6, 3], 'yellow')
   
   
  }
