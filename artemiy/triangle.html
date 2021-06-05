@@ -98,11 +98,12 @@ if (canvas.getContext)
   circle(3.5, 5.5, 1, "red");
   circle(5.5, 5.5, 1, "green")
   polygon([4, 3, 5, 3, 4.5, 5], "pink")
-  line(3, 3, 4, 2, 'yellow')
-  line(4, 2, 5, 2, 'yellow')
-  line(5, 2, 6, 3, 'yellow')
+
+  polyline([3, 3, 4, 2, 5, 2, 6, 3], 'yellow')
+  polygon([1, 5, 2, 5, 2, 7, 1, 7])
+  polygon([7, 5, 8, 5, 8, 7, 7, 7], 'gray')
+  polygon([5, 1, 7, -5, 2, -5, 4, 1], 'blue')
   
-  //polyline([3, 3, 4, 2, 5, 2, 6, 3], 'yellow')
   
   
  }
