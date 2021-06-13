@@ -7,108 +7,110 @@
 <body>
 <canvas id="DemoCanvas" width="2000" height="2000"></canvas>  
 <script>  
-var canvas = document.getElementById('DemoCanvas');
 
-  var scale = 40;
+  gScale = 40;
   xCenter = 800;
   yCenter = 500;
   gLineWidth = 10;
 
-function getX(x)
+class Robot
 {
-  return xCenter + scale * x; 
-}
-
-function getY(y)
-{
-  return yCenter - scale * y; 
-}
-
-function circle(x, y, d, color = 'black')
-{
-  var context = canvas.getContext('2d');
-
-  context.beginPath();
-  context.arc(getX(x), getY(y), 0.5 * d * scale, 0, 2 * Math.PI, false);
-  context.fillStyle = color;
-  context.fill();
-  context.lineWidth = gLineWidth;
-  context.strokeStyle = color;
-  context.stroke();
-
-}
-
-function line(ax, ay, bx, by, color = 'black')
-{
-  var context = canvas.getContext('2d');
-
-  context.lineWidth = gLineWidth;
-  context.beginPath(); 
-  context.moveTo(getX(ax), getY(ay));
-  context.lineTo(getX(bx), getY(by));
-  context.strokeStyle = color
-  context.stroke();
-}
-
-function polyline(coordinates, color = "black")
-{
-  var context = canvas.getContext('2d');
-
-  context.lineWidth = gLineWidth;
-  context.beginPath(); 
-  context.moveTo(getX(coordinates[0]), getY(coordinates[1]));
-
-  for (i = 2; i < coordinates.length; i += 2)
+  constructor(x, y, scale)
   {
-    xNew = getX(coordinates[i]);
-	yNew = getY(coordinates[i+1])
-	context.lineTo(xNew, yNew);
+    this.x_ = x;
+	this.y_ = y;
+	this.scale_ = scale;
+	var canvas = document.getElementById('DemoCanvas');
+    this.context_ = canvas.getContext('2d');
+
   }
-  context.strokeStyle = color
-  context.stroke();
 
-}
-
-
-function polygon(coordinates, color = "black")
-{
-  var context = canvas.getContext('2d');
-
-  context.fillStyle = color;
-  context.beginPath();
-  context.moveTo(getX(coordinates[0]), getY(coordinates[1]));
-
-  for (i = 2; i < coordinates.length; i += 2)
+  getX_(x)
   {
-    xNew = getX(coordinates[i]);
-	yNew = getY(coordinates[i+1])
-	context.lineTo(xNew, yNew);
+    return xCenter + gScale * this.scale_ * (x - this.x_); 
   }
   
-  context.closePath();
-  context.fill();
-
+  getY_(y)
+  {
+    return yCenter - gScale * this.scale_ * (y - this.y_); 
+  }
+  
+  circle_(x, y, d, color = 'black')
+  {
+    this.context_.beginPath();
+    this.context_.arc(this.getX_(x), this.getY_(y), 0.5 * d * this.scale_ * gScale, 0, 2 * Math.PI, false);
+    this.context_.fillStyle = color;
+    this.context_.fill();
+    this.context_.lineWidth = gLineWidth;
+    this.context_.strokeStyle = color;
+    this.context_.stroke();
+  }
+  
+  line_(ax, ay, bx, by, color = 'black')
+  {
+    this.context_.lineWidth = gLineWidth;
+    this.context_.beginPath(); 
+    this.context_.moveTo(this.getX_(ax), this.getY_(ay));
+    this.context_.lineTo(this.getX_(bx), this.getY_(by));
+    this.context_.strokeStyle = color
+    this.context_.stroke();
+  }
+  
+  polyline_(coordinates, color = "black")
+  {
+    this.context_.lineWidth = gLineWidth;
+    this.context_.beginPath(); 
+    this.context_.moveTo(this.getX_(coordinates[0]), this.getY_(coordinates[1]));
+  
+    for (var i = 2; i < coordinates.length; i += 2)
+    {
+      var xNew = this.getX_(coordinates[i]);
+      var yNew = this.getY_(coordinates[i+1])
+      this.context_.lineTo(xNew, yNew);
+    }
+    this.context_.strokeStyle = color
+    this.context_.stroke();
+  }
+  
+  polygon_(coordinates, color = "black")
+  {
+    this.context_.fillStyle = color;
+    this.context_.beginPath();
+    this.context_.moveTo(this.getX_(coordinates[0]), this.getY_(coordinates[1]));
+  
+    for (var i = 2; i < coordinates.length; i += 2)
+    {
+      var xNew = this.getX_(coordinates[i]);
+      var yNew = this.getY_(coordinates[i+1])
+      this.context_.lineTo(xNew, yNew);
+    }
+    this.context_.closePath();
+    this.context_.fill();
+  }
+  
+  draw()
+  {
+    this.polygon_([2, 1, 7, 1, 7, 7, 2, 7], "violet")
+    this.circle_(3.5, 5.5, 1, "red");
+    this.circle_(5.5, 5.5, 1, "green")
+    this.polygon_([4, 3, 5, 3, 4.5, 5], "pink")
+  
+    this.polyline_([3, 3, 4, 2, 5, 2, 6, 3], 'yellow')
+    this.polygon_([1, 5, 2, 5, 2, 7, 1, 7])
+    this.polygon_([7, 5, 8, 5, 8, 7, 7, 7], 'gray')
+    this.polygon_([5, 1, 7, -5, 2, -5, 4, 1], 'blue')
+    this.line_(3, -6, 3, -5)
+    this.line_(6, -6, 6, -5)
+  }
 }
 
-if (canvas.getContext) 
- {
-  var context = canvas.getContext('2d');
-  
-  polygon([2, 1, 7, 1, 7, 7, 2, 7], "violet")
-  circle(3.5, 5.5, 1, "red");
-  circle(5.5, 5.5, 1, "green")
-  polygon([4, 3, 5, 3, 4.5, 5], "pink")
 
-  polyline([3, 3, 4, 2, 5, 2, 6, 3], 'yellow')
-  polygon([1, 5, 2, 5, 2, 7, 1, 7])
-  polygon([7, 5, 8, 5, 8, 7, 7, 7], 'gray')
-  polygon([5, 1, 7, -5, 2, -5, 4, 1], 'blue')
-  line(3, -6, 3, -5)
-  line(6, -6, 6, -5)
-  
-  
-  
- }
+  robot = new Robot(0, 0, 1); // ReferenceError
+  robot.draw();
+
+  robot = new Robot(5, 1, 2); // ReferenceError
+  robot.draw();
+
 
  
 </script> 
