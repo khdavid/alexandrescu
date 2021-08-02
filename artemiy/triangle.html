@@ -9,8 +9,8 @@
 <script>  
 
   gScale = 40;
-  xCenter = 800;
-  yCenter = 500;
+  xCenter = 400;
+  yCenter = 300;
   gLineWidth = 10;
 
 class Robot
@@ -27,12 +27,12 @@ class Robot
 
   getX_(x)
   {
-    return xCenter + gScale * this.scale_ * (x - this.x_); 
+    return xCenter + gScale * (this.scale_ * x - this.x_); 
   }
   
   getY_(y)
   {
-    return yCenter - gScale * this.scale_ * (y - this.y_); 
+    return yCenter - gScale * (this.scale_ * y - this.y_); 
   }
   
   circle_(x, y, d, color = 'black')
@@ -105,10 +105,10 @@ class Robot
 }
 
 
-  robot = new Robot(0, 0, 1); // ReferenceError
+  robot = new Robot(0, 0, 0.5); // ReferenceError
   robot.draw();
 
-  robot = new Robot(5, 1, 2); // ReferenceError
+  robot = new Robot(5, 1, 0.5); // ReferenceError
   robot.draw();
 
 
