@@ -90,25 +90,23 @@ class Robot
   
   draw()
   {
-    this.polygon_([2, 1, 7, 1, 7, 7, 2, 7], "violet")
-    this.circle_(3.5, 5.5, 1, "red");
-    this.circle_(5.5, 5.5, 1, "green")
-    this.polygon_([4, 3, 5, 3, 4.5, 5], "pink")
+    this.polygon_([2, 1, 7, 1, 7, 7, 2, 7], "deeppink") //head
+    this.circle_(3.5, 5.5, 1, "greenyellow"); //eye
+    this.circle_(5.5, 5.5, 1, "greenyellow"); //eye
+    this.polygon_([4, 3, 5, 3, 4.5, 5], "white") //nose
   
-    this.polyline_([3, 3, 4, 2, 5, 2, 6, 3], 'yellow')
-    this.polygon_([1, 5, 2, 5, 2, 7, 1, 7])
-    this.polygon_([7, 5, 8, 5, 8, 7, 7, 7], 'gray')
-    this.polygon_([5, 1, 7, -5, 2, -5, 4, 1], 'blue')
-    this.line_(3, -6, 3, -5)
-    this.line_(6, -6, 6, -5)
+    this.polyline_([3, 3, 4, 2, 5, 2, 6, 3], 'lemonchiffron') // mouth
+    this.polygon_([1, 5, 2, 5, 2, 7, 1, 7], 'darkturquoise') // left ear
+    this.polygon_([7, 5, 8, 5, 8, 7, 7, 7], 'deepbluesky') // right ear
+    this.polygon_([5, 1, 7, -5, 2, -5, 4, 1], 'darkviolet') //belly
+    this.line_(3, -6, 3, -5, 'lightsalmon') //leg
+    this.line_(6, -6, 6, -5) // leg
   }
 }
 
+  
 
-  robot = new Robot(0, 0, 1); // ReferenceError
-  robot.draw();
-
-  robot = new Robot(5, 1, 2); // ReferenceError
+  robot = new Robot(5, 1, 1); // ReferenceError
   robot.draw();
 
 
